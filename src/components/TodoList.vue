@@ -1,19 +1,21 @@
 <template>
-  <div class="sudoku-grid">
-    <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
-      <input
-        v-for="(col, colIndex) in row"
-        :key="colIndex"
-        class="col"
-        type="text"
-        maxlength="1"
-        v-model="grid[rowIndex][colIndex]"
-        v-on:input="validateInput($event, rowIndex, colIndex)"
-      />
+  <div class="sudoku-container">
+    <div class="sudoku-grid">
+      <div v-for="(row, rowIndex) in grid" :key="rowIndex" class="row">
+        <input
+          v-for="(col, colIndex) in row"
+          :key="colIndex"
+          class="col"
+          type="text"
+          maxlength="1"
+          v-model="grid[rowIndex][colIndex]"
+          v-on:input="validateInput($event, rowIndex, colIndex)"
+        />
+      </div>
     </div>
-    <button @click="checkSudoku">Check Sudoku</button>
+    <button class="check-button" @click="checkSudoku">Check Sudoku</button>
     <div v-if="isSudokuValid !== null">
-      {{ isSudokuValid ? "Sudoku is valid!" : "Sudoku is invalid!" }}
+      <p class="result">{{ isSudokuValid ? "Sudoku is valid!" : "Sudoku is invalid!" }}</p>
     </div>
   </div>
 </template>
@@ -105,19 +107,61 @@ export default {
 </script>
 
 <style>
+.sudoku-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
 .sudoku-grid {
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 100%;
+  max-width: 360px;
   margin: auto;
 }
+
 .row {
   display: flex;
 }
+
 input {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 40px;
   text-align: center;
-  margin: 2px;
+  margin: 1px;
+  font-size: 1.5em;
+  box-sizing: border-box;
+}
+
+.check-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+}
+
+.result {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+@media (max-width: 600px) {
+  .sudoku-grid {
+    max-width: 100%;
+  }
+
+  input {
+    height: 30px;
+    font-size: 1.2em;
+  }
+
+  .check-button {
+    font-size: 1em;
+  }
+
+  .result {
+    font-size: 1em;
+  }
 }
 </style>
