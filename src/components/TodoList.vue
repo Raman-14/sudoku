@@ -51,7 +51,10 @@ export default {
       for (let row = 0; row < 3; row++) {
         const st = new Set();
         for (let col = 0; col < 3; col++) {
-          if (this.grid[row][col] === "") continue;
+          if (this.grid[row][col] === "") {
+            this.isSudokuValid=false;
+            return;
+          }
           if (st.has(this.grid[row][col])) {
             this.isSudokuValid = false;
             return;
@@ -59,6 +62,7 @@ export default {
           st.add(this.grid[row][col]);
         }
       }
+
 
       // Check each column
       for (let col = 0; col < 3; col++) {
