@@ -37,7 +37,7 @@ export default {
       const value = event.target.value;
       const number = parseInt(value);
 
-      if (value.length === 1 && number >= 1 && number <= 9) {
+      if (value.length === 1 && number >= 1 && number <= 3) {
         this.grid[rowIndex][colIndex] = number;
       } else if (value === "") {
         this.grid[rowIndex][colIndex] = "";
